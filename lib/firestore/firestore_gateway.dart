@@ -48,6 +48,36 @@ class FirestoreGateway {
     return Page(documents, response.nextPageToken);
   }
 
+  Stream<List<Document>> streamQuery(String parent, StructuredQuery query) {
+  // Generate a unique key for the query to manage stream cache
+  String key = '$parent:${query.hashCode}';
+
+  if (_listenStreamCache.containsKey(key)) {
+    return _mapCollectionStream(_listenStreamCache[key]!);
+  }
+
+  final queryTarget = Target_QueryTarget()
+    ..parent = parent
+    ..structuredQuery = query;
+  final target = Target()..query = queryTarget;
+  final request = ListenRequest()
+    ..database = database
+    ..addTarget = target;
+
+  _listenStreamCache[key] = _ListenStreamWrapper.create(
+    request,
+    (requestStream) => _client.listen(
+      requestStream,
+      options: CallOptions(
+        metadata: {'google-cloud-resource-prefix': database},
+      ),
+    ),
+    onDone: () => _listenStreamCache.remove(key),
+  );
+
+  return _mapCollectionStream(_listenStreamCache[key]!);
+}
+
   Stream<List<Document>> streamCollection(String path) {
     if (_listenStreamCache.containsKey(path)) {
       return _mapCollectionStream(_listenStreamCache[path]!);

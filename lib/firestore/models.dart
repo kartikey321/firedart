@@ -112,7 +112,17 @@ class CollectionReference extends Reference {
           {int pageSize = 1024, String nextPageToken = ''}) =>
       _gateway.getCollection(fullPath, pageSize, nextPageToken);
 
-  Stream<List<Document>> get stream => _gateway.streamCollection(fullPath);
+ Stream<List<Document>> get stream {
+  var fullCollectionPath = fullPath;
+  var parent = fullCollectionPath.substring(0, fullCollectionPath.lastIndexOf('/'));
+  var collectionId = fullCollectionPath.substring(fullCollectionPath.lastIndexOf('/') + 1);
+  
+  var query = StructuredQuery()
+    ..from.add(StructuredQuery_CollectionSelector()..collectionId = collectionId);
+
+  return _gateway.streamQuery(parent, query);
+}
+
 
   /// Create a document with a random id.
   Future<Document> add(Map<String, dynamic> map) =>
@@ -309,6 +319,13 @@ class QueryReference extends Reference {
 
     return this;
   }
+
+  Stream<List<Document>> get stream {
+  var collectionPath = fullPath;
+  var parent = collectionPath.substring(0, collectionPath.lastIndexOf('/'));
+  return _gateway.streamQuery(parent, _structuredQuery);
+}
+
 
   /// Returns [QueryReference] that's additionally sorted by the specified
   /// [fieldPath].
