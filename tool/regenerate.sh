@@ -27,6 +27,7 @@ $PROTOC $GOOGLEAPIS/google/firestore/v1/common.proto
 $PROTOC $GOOGLEAPIS/google/firestore/v1/document.proto
 $PROTOC $GOOGLEAPIS/google/firestore/v1/firestore.proto
 $PROTOC $GOOGLEAPIS/google/firestore/v1/query.proto
+$PROTOC $GOOGLEAPIS/google/firestore/v1/query_profile.proto
 $PROTOC $GOOGLEAPIS/google/firestore/v1/write.proto
 
 $PROTOC $GOOGLEAPIS/google/type/latlng.proto
