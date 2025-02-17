@@ -15,13 +15,14 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../protobuf/timestamp.pb.dart' as $4;
-import '../../protobuf/wrappers.pb.dart' as $8;
-import '../../rpc/status.pb.dart' as $9;
-import 'aggregation_result.pb.dart' as $7;
+import '../../protobuf/wrappers.pb.dart' as $9;
+import '../../rpc/status.pb.dart' as $10;
+import 'aggregation_result.pb.dart' as $8;
 import 'common.pb.dart' as $3;
 import 'document.pb.dart' as $1;
 import 'firestore.pbenum.dart';
 import 'query.pb.dart' as $6;
+import 'query_profile.pb.dart' as $7;
 import 'write.pb.dart' as $5;
 
 export 'firestore.pbenum.dart';
@@ -1684,6 +1685,7 @@ class RunQueryRequest extends $pb.GeneratedMessage {
     $core.List<$core.int>? transaction,
     $3.TransactionOptions? newTransaction,
     $4.Timestamp? readTime,
+    $7.ExplainOptions? explainOptions,
   }) {
     final $result = create();
     if (parent != null) {
@@ -1700,6 +1702,9 @@ class RunQueryRequest extends $pb.GeneratedMessage {
     }
     if (readTime != null) {
       $result.readTime = readTime;
+    }
+    if (explainOptions != null) {
+      $result.explainOptions = explainOptions;
     }
     return $result;
   }
@@ -1739,6 +1744,8 @@ class RunQueryRequest extends $pb.GeneratedMessage {
         subBuilder: $3.TransactionOptions.create)
     ..aOM<$4.Timestamp>(7, _omitFieldNames ? '' : 'readTime',
         subBuilder: $4.Timestamp.create)
+    ..aOM<$7.ExplainOptions>(10, _omitFieldNames ? '' : 'explainOptions',
+        subBuilder: $7.ExplainOptions.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -1856,6 +1863,22 @@ class RunQueryRequest extends $pb.GeneratedMessage {
   void clearReadTime() => clearField(7);
   @$pb.TagNumber(7)
   $4.Timestamp ensureReadTime() => $_ensure(4);
+
+  /// Optional. Explain options for the query. If set, additional query
+  /// statistics will be returned. If not, only query results will be returned.
+  @$pb.TagNumber(10)
+  $7.ExplainOptions get explainOptions => $_getN(5);
+  @$pb.TagNumber(10)
+  set explainOptions($7.ExplainOptions v) {
+    setField(10, v);
+  }
+
+  @$pb.TagNumber(10)
+  $core.bool hasExplainOptions() => $_has(5);
+  @$pb.TagNumber(10)
+  void clearExplainOptions() => clearField(10);
+  @$pb.TagNumber(10)
+  $7.ExplainOptions ensureExplainOptions() => $_ensure(5);
 }
 
 enum RunQueryResponse_ContinuationSelector { done, notSet }
@@ -1869,6 +1892,7 @@ class RunQueryResponse extends $pb.GeneratedMessage {
     $4.Timestamp? readTime,
     $core.int? skippedResults,
     $core.bool? done,
+    $7.ExplainMetrics? explainMetrics,
   }) {
     final $result = create();
     if (document != null) {
@@ -1885,6 +1909,9 @@ class RunQueryResponse extends $pb.GeneratedMessage {
     }
     if (done != null) {
       $result.done = done;
+    }
+    if (explainMetrics != null) {
+      $result.explainMetrics = explainMetrics;
     }
     return $result;
   }
@@ -1916,6 +1943,8 @@ class RunQueryResponse extends $pb.GeneratedMessage {
     ..a<$core.int>(
         4, _omitFieldNames ? '' : 'skippedResults', $pb.PbFieldType.O3)
     ..aOB(6, _omitFieldNames ? '' : 'done')
+    ..aOM<$7.ExplainMetrics>(11, _omitFieldNames ? '' : 'explainMetrics',
+        subBuilder: $7.ExplainMetrics.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -2025,6 +2054,23 @@ class RunQueryResponse extends $pb.GeneratedMessage {
   $core.bool hasDone() => $_has(4);
   @$pb.TagNumber(6)
   void clearDone() => clearField(6);
+
+  /// Query explain metrics. This is only present when the
+  /// [RunQueryRequest.explain_options][google.firestore.v1.RunQueryRequest.explain_options]
+  /// is provided, and it is sent only once with the last response in the stream.
+  @$pb.TagNumber(11)
+  $7.ExplainMetrics get explainMetrics => $_getN(5);
+  @$pb.TagNumber(11)
+  set explainMetrics($7.ExplainMetrics v) {
+    setField(11, v);
+  }
+
+  @$pb.TagNumber(11)
+  $core.bool hasExplainMetrics() => $_has(5);
+  @$pb.TagNumber(11)
+  void clearExplainMetrics() => clearField(11);
+  @$pb.TagNumber(11)
+  $7.ExplainMetrics ensureExplainMetrics() => $_ensure(5);
 }
 
 enum RunAggregationQueryRequest_QueryType { structuredAggregationQuery, notSet }
@@ -2045,6 +2091,7 @@ class RunAggregationQueryRequest extends $pb.GeneratedMessage {
     $core.List<$core.int>? transaction,
     $3.TransactionOptions? newTransaction,
     $4.Timestamp? readTime,
+    $7.ExplainOptions? explainOptions,
   }) {
     final $result = create();
     if (parent != null) {
@@ -2061,6 +2108,9 @@ class RunAggregationQueryRequest extends $pb.GeneratedMessage {
     }
     if (readTime != null) {
       $result.readTime = readTime;
+    }
+    if (explainOptions != null) {
+      $result.explainOptions = explainOptions;
     }
     return $result;
   }
@@ -2102,6 +2152,8 @@ class RunAggregationQueryRequest extends $pb.GeneratedMessage {
         subBuilder: $3.TransactionOptions.create)
     ..aOM<$4.Timestamp>(6, _omitFieldNames ? '' : 'readTime',
         subBuilder: $4.Timestamp.create)
+    ..aOM<$7.ExplainOptions>(8, _omitFieldNames ? '' : 'explainOptions',
+        subBuilder: $7.ExplainOptions.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -2223,15 +2275,32 @@ class RunAggregationQueryRequest extends $pb.GeneratedMessage {
   void clearReadTime() => clearField(6);
   @$pb.TagNumber(6)
   $4.Timestamp ensureReadTime() => $_ensure(4);
+
+  /// Optional. Explain options for the query. If set, additional query
+  /// statistics will be returned. If not, only query results will be returned.
+  @$pb.TagNumber(8)
+  $7.ExplainOptions get explainOptions => $_getN(5);
+  @$pb.TagNumber(8)
+  set explainOptions($7.ExplainOptions v) {
+    setField(8, v);
+  }
+
+  @$pb.TagNumber(8)
+  $core.bool hasExplainOptions() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearExplainOptions() => clearField(8);
+  @$pb.TagNumber(8)
+  $7.ExplainOptions ensureExplainOptions() => $_ensure(5);
 }
 
 /// The response for
 /// [Firestore.RunAggregationQuery][google.firestore.v1.Firestore.RunAggregationQuery].
 class RunAggregationQueryResponse extends $pb.GeneratedMessage {
   factory RunAggregationQueryResponse({
-    $7.AggregationResult? result,
+    $8.AggregationResult? result,
     $core.List<$core.int>? transaction,
     $4.Timestamp? readTime,
+    $7.ExplainMetrics? explainMetrics,
   }) {
     final $result = create();
     if (result != null) {
@@ -2242,6 +2311,9 @@ class RunAggregationQueryResponse extends $pb.GeneratedMessage {
     }
     if (readTime != null) {
       $result.readTime = readTime;
+    }
+    if (explainMetrics != null) {
+      $result.explainMetrics = explainMetrics;
     }
     return $result;
   }
@@ -2258,12 +2330,14 @@ class RunAggregationQueryResponse extends $pb.GeneratedMessage {
       package:
           const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
       createEmptyInstance: create)
-    ..aOM<$7.AggregationResult>(1, _omitFieldNames ? '' : 'result',
-        subBuilder: $7.AggregationResult.create)
+    ..aOM<$8.AggregationResult>(1, _omitFieldNames ? '' : 'result',
+        subBuilder: $8.AggregationResult.create)
     ..a<$core.List<$core.int>>(
         2, _omitFieldNames ? '' : 'transaction', $pb.PbFieldType.OY)
     ..aOM<$4.Timestamp>(3, _omitFieldNames ? '' : 'readTime',
         subBuilder: $4.Timestamp.create)
+    ..aOM<$7.ExplainMetrics>(10, _omitFieldNames ? '' : 'explainMetrics',
+        subBuilder: $7.ExplainMetrics.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -2297,9 +2371,9 @@ class RunAggregationQueryResponse extends $pb.GeneratedMessage {
   ///
   ///  Not present when reporting partial progress.
   @$pb.TagNumber(1)
-  $7.AggregationResult get result => $_getN(0);
+  $8.AggregationResult get result => $_getN(0);
   @$pb.TagNumber(1)
-  set result($7.AggregationResult v) {
+  set result($8.AggregationResult v) {
     setField(1, v);
   }
 
@@ -2308,7 +2382,7 @@ class RunAggregationQueryResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearResult() => clearField(1);
   @$pb.TagNumber(1)
-  $7.AggregationResult ensureResult() => $_ensure(0);
+  $8.AggregationResult ensureResult() => $_ensure(0);
 
   ///  The transaction that was started as part of this request.
   ///
@@ -2347,6 +2421,23 @@ class RunAggregationQueryResponse extends $pb.GeneratedMessage {
   void clearReadTime() => clearField(3);
   @$pb.TagNumber(3)
   $4.Timestamp ensureReadTime() => $_ensure(2);
+
+  /// Query explain metrics. This is only present when the
+  /// [RunAggregationQueryRequest.explain_options][google.firestore.v1.RunAggregationQueryRequest.explain_options]
+  /// is provided, and it is sent only once with the last response in the stream.
+  @$pb.TagNumber(10)
+  $7.ExplainMetrics get explainMetrics => $_getN(3);
+  @$pb.TagNumber(10)
+  set explainMetrics($7.ExplainMetrics v) {
+    setField(10, v);
+  }
+
+  @$pb.TagNumber(10)
+  $core.bool hasExplainMetrics() => $_has(3);
+  @$pb.TagNumber(10)
+  void clearExplainMetrics() => clearField(10);
+  @$pb.TagNumber(10)
+  $7.ExplainMetrics ensureExplainMetrics() => $_ensure(3);
 }
 
 enum PartitionQueryRequest_QueryType { structuredQuery, notSet }
@@ -3428,7 +3519,7 @@ class Target extends $pb.GeneratedMessage {
     $core.int? targetId,
     $core.bool? once,
     $4.Timestamp? readTime,
-    $8.Int32Value? expectedCount,
+    $9.Int32Value? expectedCount,
   }) {
     final $result = create();
     if (query != null) {
@@ -3491,8 +3582,8 @@ class Target extends $pb.GeneratedMessage {
     ..aOB(6, _omitFieldNames ? '' : 'once')
     ..aOM<$4.Timestamp>(11, _omitFieldNames ? '' : 'readTime',
         subBuilder: $4.Timestamp.create)
-    ..aOM<$8.Int32Value>(12, _omitFieldNames ? '' : 'expectedCount',
-        subBuilder: $8.Int32Value.create)
+    ..aOM<$9.Int32Value>(12, _omitFieldNames ? '' : 'expectedCount',
+        subBuilder: $9.Int32Value.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -3636,9 +3727,9 @@ class Target extends $pb.GeneratedMessage {
   ///  being present and greater than zero signals that the client wants
   ///  `ExistenceFilter.unchanged_names` to be included in the response.
   @$pb.TagNumber(12)
-  $8.Int32Value get expectedCount => $_getN(6);
+  $9.Int32Value get expectedCount => $_getN(6);
   @$pb.TagNumber(12)
-  set expectedCount($8.Int32Value v) {
+  set expectedCount($9.Int32Value v) {
     setField(12, v);
   }
 
@@ -3647,7 +3738,7 @@ class Target extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   void clearExpectedCount() => clearField(12);
   @$pb.TagNumber(12)
-  $8.Int32Value ensureExpectedCount() => $_ensure(6);
+  $9.Int32Value ensureExpectedCount() => $_ensure(6);
 }
 
 /// Targets being watched have changed.
@@ -3655,7 +3746,7 @@ class TargetChange extends $pb.GeneratedMessage {
   factory TargetChange({
     TargetChange_TargetChangeType? targetChangeType,
     $core.Iterable<$core.int>? targetIds,
-    $9.Status? cause,
+    $10.Status? cause,
     $core.List<$core.int>? resumeToken,
     $4.Timestamp? readTime,
   }) {
@@ -3696,8 +3787,8 @@ class TargetChange extends $pb.GeneratedMessage {
         valueOf: TargetChange_TargetChangeType.valueOf,
         enumValues: TargetChange_TargetChangeType.values)
     ..p<$core.int>(2, _omitFieldNames ? '' : 'targetIds', $pb.PbFieldType.K3)
-    ..aOM<$9.Status>(3, _omitFieldNames ? '' : 'cause',
-        subBuilder: $9.Status.create)
+    ..aOM<$10.Status>(3, _omitFieldNames ? '' : 'cause',
+        subBuilder: $10.Status.create)
     ..a<$core.List<$core.int>>(
         4, _omitFieldNames ? '' : 'resumeToken', $pb.PbFieldType.OY)
     ..aOM<$4.Timestamp>(6, _omitFieldNames ? '' : 'readTime',
@@ -3750,9 +3841,9 @@ class TargetChange extends $pb.GeneratedMessage {
 
   /// The error that resulted in this change, if applicable.
   @$pb.TagNumber(3)
-  $9.Status get cause => $_getN(2);
+  $10.Status get cause => $_getN(2);
   @$pb.TagNumber(3)
-  set cause($9.Status v) {
+  set cause($10.Status v) {
     setField(3, v);
   }
 
@@ -3761,7 +3852,7 @@ class TargetChange extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearCause() => clearField(3);
   @$pb.TagNumber(3)
-  $9.Status ensureCause() => $_ensure(2);
+  $10.Status ensureCause() => $_ensure(2);
 
   ///  A token that can be used to resume the stream for the given `target_ids`,
   ///  or all targets if `target_ids` is empty.
@@ -4123,7 +4214,7 @@ class BatchWriteRequest extends $pb.GeneratedMessage {
 class BatchWriteResponse extends $pb.GeneratedMessage {
   factory BatchWriteResponse({
     $core.Iterable<$5.WriteResult>? writeResults,
-    $core.Iterable<$9.Status>? status,
+    $core.Iterable<$10.Status>? status,
   }) {
     final $result = create();
     if (writeResults != null) {
@@ -4150,8 +4241,8 @@ class BatchWriteResponse extends $pb.GeneratedMessage {
     ..pc<$5.WriteResult>(
         1, _omitFieldNames ? '' : 'writeResults', $pb.PbFieldType.PM,
         subBuilder: $5.WriteResult.create)
-    ..pc<$9.Status>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.PM,
-        subBuilder: $9.Status.create)
+    ..pc<$10.Status>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.PM,
+        subBuilder: $10.Status.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -4189,7 +4280,7 @@ class BatchWriteResponse extends $pb.GeneratedMessage {
   ///  This i-th write status corresponds to the i-th write in the
   ///  request.
   @$pb.TagNumber(2)
-  $core.List<$9.Status> get status => $_getList(1);
+  $core.List<$10.Status> get status => $_getList(1);
 }
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');

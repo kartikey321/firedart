@@ -397,7 +397,7 @@ class Value extends $pb.GeneratedMessage {
 
   ///  An array value.
   ///
-  ///  Cannot directly contain another array value, though can contain an
+  ///  Cannot directly contain another array value, though can contain a
   ///  map which contains another array.
   @$pb.TagNumber(9)
   ArrayValue get arrayValue => $_getN(6);

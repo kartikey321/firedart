@@ -157,4 +157,39 @@ class StructuredQuery_UnaryFilter_Operator extends $pb.ProtobufEnum {
       : super(v, n);
 }
 
+/// The distance measure to use when comparing vectors.
+class StructuredQuery_FindNearest_DistanceMeasure extends $pb.ProtobufEnum {
+  static const StructuredQuery_FindNearest_DistanceMeasure
+      DISTANCE_MEASURE_UNSPECIFIED =
+      StructuredQuery_FindNearest_DistanceMeasure._(
+          0, _omitEnumNames ? '' : 'DISTANCE_MEASURE_UNSPECIFIED');
+  static const StructuredQuery_FindNearest_DistanceMeasure EUCLIDEAN =
+      StructuredQuery_FindNearest_DistanceMeasure._(
+          1, _omitEnumNames ? '' : 'EUCLIDEAN');
+  static const StructuredQuery_FindNearest_DistanceMeasure COSINE =
+      StructuredQuery_FindNearest_DistanceMeasure._(
+          2, _omitEnumNames ? '' : 'COSINE');
+  static const StructuredQuery_FindNearest_DistanceMeasure DOT_PRODUCT =
+      StructuredQuery_FindNearest_DistanceMeasure._(
+          3, _omitEnumNames ? '' : 'DOT_PRODUCT');
+
+  static const $core.List<StructuredQuery_FindNearest_DistanceMeasure> values =
+      <StructuredQuery_FindNearest_DistanceMeasure>[
+    DISTANCE_MEASURE_UNSPECIFIED,
+    EUCLIDEAN,
+    COSINE,
+    DOT_PRODUCT,
+  ];
+
+  static final $core.Map<$core.int, StructuredQuery_FindNearest_DistanceMeasure>
+      _byValue = $pb.ProtobufEnum.initByValue(values);
+  static StructuredQuery_FindNearest_DistanceMeasure? valueOf(
+          $core.int value) =>
+      _byValue[value];
+
+  const StructuredQuery_FindNearest_DistanceMeasure._(
+      $core.int v, $core.String n)
+      : super(v, n);
+}
+
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

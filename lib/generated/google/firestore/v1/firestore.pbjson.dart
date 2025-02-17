@@ -457,6 +457,15 @@ const RunQueryRequest$json = {
       '9': 1,
       '10': 'readTime'
     },
+    {
+      '1': 'explain_options',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.google.firestore.v1.ExplainOptions',
+      '8': {},
+      '10': 'explainOptions'
+    },
   ],
   '8': [
     {'1': 'query_type'},
@@ -471,8 +480,9 @@ final $typed_data.Uint8List runQueryRequestDescriptor = $convert.base64Decode(
     'AFIPc3RydWN0dXJlZFF1ZXJ5EiIKC3RyYW5zYWN0aW9uGAUgASgMSAFSC3RyYW5zYWN0aW9uEl'
     'IKD25ld190cmFuc2FjdGlvbhgGIAEoCzInLmdvb2dsZS5maXJlc3RvcmUudjEuVHJhbnNhY3Rp'
     'b25PcHRpb25zSAFSDm5ld1RyYW5zYWN0aW9uEjkKCXJlYWRfdGltZRgHIAEoCzIaLmdvb2dsZS'
-    '5wcm90b2J1Zi5UaW1lc3RhbXBIAVIIcmVhZFRpbWVCDAoKcXVlcnlfdHlwZUIWChRjb25zaXN0'
-    'ZW5jeV9zZWxlY3Rvcg==');
+    '5wcm90b2J1Zi5UaW1lc3RhbXBIAVIIcmVhZFRpbWUSUQoPZXhwbGFpbl9vcHRpb25zGAogASgL'
+    'MiMuZ29vZ2xlLmZpcmVzdG9yZS52MS5FeHBsYWluT3B0aW9uc0ID4EEBUg5leHBsYWluT3B0aW'
+    '9uc0IMCgpxdWVyeV90eXBlQhYKFGNvbnNpc3RlbmN5X3NlbGVjdG9y');
 
 @$core.Deprecated('Use runQueryResponseDescriptor instead')
 const RunQueryResponse$json = {
@@ -497,6 +507,14 @@ const RunQueryResponse$json = {
     },
     {'1': 'skipped_results', '3': 4, '4': 1, '5': 5, '10': 'skippedResults'},
     {'1': 'done', '3': 6, '4': 1, '5': 8, '9': 0, '10': 'done'},
+    {
+      '1': 'explain_metrics',
+      '3': 11,
+      '4': 1,
+      '5': 11,
+      '6': '.google.firestore.v1.ExplainMetrics',
+      '10': 'explainMetrics'
+    },
   ],
   '8': [
     {'1': 'continuation_selector'},
@@ -509,7 +527,9 @@ final $typed_data.Uint8List runQueryResponseDescriptor = $convert.base64Decode(
     'hkb2N1bWVudBgBIAEoCzIdLmdvb2dsZS5maXJlc3RvcmUudjEuRG9jdW1lbnRSCGRvY3VtZW50'
     'EjcKCXJlYWRfdGltZRgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCHJlYWRUaW'
     '1lEicKD3NraXBwZWRfcmVzdWx0cxgEIAEoBVIOc2tpcHBlZFJlc3VsdHMSFAoEZG9uZRgGIAEo'
-    'CEgAUgRkb25lQhcKFWNvbnRpbnVhdGlvbl9zZWxlY3Rvcg==');
+    'CEgAUgRkb25lEkwKD2V4cGxhaW5fbWV0cmljcxgLIAEoCzIjLmdvb2dsZS5maXJlc3RvcmUudj'
+    'EuRXhwbGFpbk1ldHJpY3NSDmV4cGxhaW5NZXRyaWNzQhcKFWNvbnRpbnVhdGlvbl9zZWxlY3Rv'
+    'cg==');
 
 @$core.Deprecated('Use runAggregationQueryRequestDescriptor instead')
 const RunAggregationQueryRequest$json = {
@@ -544,6 +564,15 @@ const RunAggregationQueryRequest$json = {
       '9': 1,
       '10': 'readTime'
     },
+    {
+      '1': 'explain_options',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.google.firestore.v1.ExplainOptions',
+      '8': {},
+      '10': 'explainOptions'
+    },
   ],
   '8': [
     {'1': 'query_type'},
@@ -559,8 +588,9 @@ final $typed_data.Uint8List runAggregationQueryRequestDescriptor = $convert.base
     'lvblF1ZXJ5EiIKC3RyYW5zYWN0aW9uGAQgASgMSAFSC3RyYW5zYWN0aW9uElIKD25ld190cmFu'
     'c2FjdGlvbhgFIAEoCzInLmdvb2dsZS5maXJlc3RvcmUudjEuVHJhbnNhY3Rpb25PcHRpb25zSA'
     'FSDm5ld1RyYW5zYWN0aW9uEjkKCXJlYWRfdGltZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5U'
-    'aW1lc3RhbXBIAVIIcmVhZFRpbWVCDAoKcXVlcnlfdHlwZUIWChRjb25zaXN0ZW5jeV9zZWxlY3'
-    'Rvcg==');
+    'aW1lc3RhbXBIAVIIcmVhZFRpbWUSUQoPZXhwbGFpbl9vcHRpb25zGAggASgLMiMuZ29vZ2xlLm'
+    'ZpcmVzdG9yZS52MS5FeHBsYWluT3B0aW9uc0ID4EEBUg5leHBsYWluT3B0aW9uc0IMCgpxdWVy'
+    'eV90eXBlQhYKFGNvbnNpc3RlbmN5X3NlbGVjdG9y');
 
 @$core.Deprecated('Use runAggregationQueryResponseDescriptor instead')
 const RunAggregationQueryResponse$json = {
@@ -583,6 +613,14 @@ const RunAggregationQueryResponse$json = {
       '6': '.google.protobuf.Timestamp',
       '10': 'readTime'
     },
+    {
+      '1': 'explain_metrics',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.google.firestore.v1.ExplainMetrics',
+      '10': 'explainMetrics'
+    },
   ],
 };
 
@@ -591,7 +629,8 @@ final $typed_data.Uint8List runAggregationQueryResponseDescriptor = $convert.bas
     'ChtSdW5BZ2dyZWdhdGlvblF1ZXJ5UmVzcG9uc2USPgoGcmVzdWx0GAEgASgLMiYuZ29vZ2xlLm'
     'ZpcmVzdG9yZS52MS5BZ2dyZWdhdGlvblJlc3VsdFIGcmVzdWx0EiAKC3RyYW5zYWN0aW9uGAIg'
     'ASgMUgt0cmFuc2FjdGlvbhI3CglyZWFkX3RpbWUYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVG'
-    'ltZXN0YW1wUghyZWFkVGltZQ==');
+    'ltZXN0YW1wUghyZWFkVGltZRJMCg9leHBsYWluX21ldHJpY3MYCiABKAsyIy5nb29nbGUuZmly'
+    'ZXN0b3JlLnYxLkV4cGxhaW5NZXRyaWNzUg5leHBsYWluTWV0cmljcw==');
 
 @$core.Deprecated('Use partitionQueryRequestDescriptor instead')
 const PartitionQueryRequest$json = {
