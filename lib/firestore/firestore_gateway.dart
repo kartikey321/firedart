@@ -35,7 +35,6 @@ class FirestoreGateway {
     documentDatabase = '$database/documents';
     _setupClient(emulator: emulator);
   }
-
   Future<Page<Document>> getCollection(
       String path, int pageSize, String nextPageToken) async {
     var request = ListDocumentsRequest()
@@ -213,24 +212,48 @@ class FirestoreGateway {
   Future<T> _runTransaction<T>(
     TransactionHandler<T> transactionHandler,
   ) async {
-    final transactionRequest = BeginTransactionRequest(database: database);
-    var transactionResponse = await _client
-        .beginTransaction(transactionRequest)
-        .catchError(_handleError);
+    try {
+      // Get fresh token
+      final token = await FirebaseAuth.instance.tokenProvider.idToken;
 
-    var transactionId = transactionResponse.transaction;
-    var transaction = Transaction(this, transactionId);
+      final transactionRequest = BeginTransactionRequest()..database = database;
 
-    final result = await transactionHandler(transaction);
+      final options = CallOptions(metadata: {
+        'authorization': 'Bearer $token',
+        'google-cloud-resource-prefix': database,
+        'x-goog-request-params': 'database=$database'
+      });
 
-    var commitRequest = CommitRequest(
-      database: database,
-      transaction: transactionId,
-      writes: transaction.mutations,
-    );
-    await _client.commit(commitRequest).catchError(_handleError);
+      print('Starting transaction with database: $database');
+      print('Token being used: $token');
 
-    return result;
+      var transactionResponse = await _client
+          .beginTransaction(transactionRequest, options: options)
+          .catchError((e) {
+        print('Detailed error in beginTransaction: $e');
+        return _handleError(e);
+      });
+
+      var transactionId = transactionResponse.transaction;
+      var transaction = Transaction(this, transactionId);
+
+      final result = await transactionHandler(transaction);
+
+      var commitRequest = CommitRequest()
+        ..database = database
+        ..transaction = transactionId
+        ..writes.addAll(transaction.mutations);
+
+      await _client
+          .commit(commitRequest, options: options)
+          .catchError(_handleError);
+
+      return result;
+    } catch (e, stack) {
+      print('Full transaction error: $e');
+      print('Stack trace: $stack');
+      rethrow;
+    }
   }
 
   void close() {
@@ -239,10 +262,15 @@ class FirestoreGateway {
     _channel.shutdown();
   }
 
-  void _setupClient({Emulator? emulator}) {
-    final callOptions = _authenticator != null
-        ? CallOptions(providers: [_authenticator!])
-        : null;
+  void _setupClient({Emulator? emulator}) async {
+    final token = FirebaseAuth.instance.tokenProvider.idToken;
+
+    final callOptions = CallOptions(metadata: {
+      'authorization': 'Bearer ${await token}',
+      'google-cloud-resource-prefix': database,
+      'x-goog-request-params': 'database=$database'
+    });
+
     _listenStreamCache.clear();
     _channel = emulator == null
         ? ClientChannel(
