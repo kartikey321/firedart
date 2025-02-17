@@ -18,6 +18,7 @@ $PROTOC $PROTOBUF/src/google/protobuf/any.proto
 $PROTOC $PROTOBUF/src/google/protobuf/empty.proto
 $PROTOC $PROTOBUF/src/google/protobuf/struct.proto
 $PROTOC $PROTOBUF/src/google/protobuf/timestamp.proto
+$PROTOC $PROTOBUF/src/google/protobuf/duration.proto
 
 $PROTOC $PROTOBUF/src/google/protobuf/wrappers.proto
 
